@@ -1,47 +1,70 @@
 package com.example.jetpackcomposeintroduction
 
-import android.icu.text.CaseMap
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { Title() }
+        setContent {
+            UserCard()
+        }
     }
 }
 
 @Composable
-fun Title() {
+fun UserCard() {
     val context = LocalContext.current
-    Text(
-        text = "Simplified Coding",
-        fontSize = 14.sp,
-        color = colorResource(id = R.color.purple_700),
-        fontFamily = FontFamily.Cursive,
-        modifier = Modifier.clickable {
-            Toast.makeText(context,"Title Clicked", Toast.LENGTH_LONG).show()
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(12.dp)
+            .border(width = 1.dp, color = Color.Gray)
+            .padding(12.dp)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = "",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(120.dp)
+                .clip(CircleShape)
+        )
+        Column(modifier = Modifier.padding(start = 8.dp)) {
+            Text(text = stringResource(id = R.string.dummytext), maxLines = 4)
+            Button(onClick = {
+                Toast.makeText(context, "View Profile Clicked", Toast.LENGTH_SHORT).show()
+            }, Modifier.padding(top = 4.dp)) {
+                Text(text = "View Profile")
+            }
         }
-    )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview(){
+fun DefaultPreview() {
     Surface(Modifier.fillMaxSize()) {
-        Title()
+        UserCard()
     }
 }
