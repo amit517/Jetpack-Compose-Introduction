@@ -14,6 +14,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,7 +30,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            UserList()
+            MainContent()
         }
     }
 }
@@ -40,13 +42,24 @@ data class User(
 val users = listOf(User(1), User(1), User(1), User(1), User(1), User(1), User(1), User(1))
 
 @Composable
-fun UserList() {
-//    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-//        for (i in 1..10) {
-//            UserCard()
-//        }
-//    }
+fun MainContent() {
+    val user = User(1)
+    val users = remember {
+        mutableStateListOf(user)
+    }
 
+    Box(modifier = Modifier.fillMaxSize()) {
+        UserList(users = users)
+        Button(modifier = Modifier.padding(24.dp).align(Alignment.BottomCenter),onClick = {
+            users.add(User(1))
+        }) {
+            Text(text = "Add More")
+        }
+    }
+}
+
+@Composable
+fun UserList(users: List<User>) {
     LazyColumn() {
         items((users)) { _ ->
             UserCard()
@@ -98,6 +111,6 @@ fun UserCard() {
 @Composable
 fun DefaultPreview() {
     Surface(Modifier.fillMaxSize()) {
-        UserList()
+        MainContent()
     }
 }
