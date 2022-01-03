@@ -1,6 +1,10 @@
 package com.example.jetpackcomposeintroduction
 
+import android.inputmethodservice.Keyboard
+import android.media.Image
 import android.os.Bundle
+import android.view.Surface
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,12 +29,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetpackcomposeintroduction.ui.theme.JetpackComposeIntroductionTheme
+import org.w3c.dom.Text
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainContent()
+            JetpackComposeIntroductionTheme {
+                Column {
+                    UserCard()
+                    MainContent()
+                }
+            }
         }
     }
 }
@@ -50,7 +61,9 @@ fun MainContent() {
 
     Box(modifier = Modifier.fillMaxSize()) {
         UserList(users = users)
-        Button(modifier = Modifier.padding(24.dp).align(Alignment.BottomCenter),onClick = {
+        Button(modifier = Modifier
+            .padding(24.dp)
+            .align(Alignment.BottomCenter), onClick = {
             users.add(User(1))
         }) {
             Text(text = "Add More")
