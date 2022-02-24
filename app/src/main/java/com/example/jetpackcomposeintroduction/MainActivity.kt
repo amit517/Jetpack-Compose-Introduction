@@ -37,86 +37,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeIntroductionTheme {
-                Column {
-                    UserCard()
-                    MainContent()
-                }
+
             }
         }
     }
 }
 
-data class User(
-    val id: Int
-)
-
-val users = listOf(User(1), User(1), User(1), User(1), User(1), User(1), User(1), User(1))
-
+@Preview
 @Composable
-fun MainContent() {
-    val user = User(1)
-    val users = remember {
-        mutableStateListOf(user)
-    }
+fun ComposeTestTheme(){
+    Column(modifier = Modifier.fillMaxSize()) {
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        UserList(users = users)
-        Button(modifier = Modifier
-            .padding(24.dp)
-            .align(Alignment.BottomCenter), onClick = {
-            users.add(User(1))
-        }) {
-            Text(text = "Add More")
-        }
-    }
-}
-
-@Composable
-fun UserList(users: List<User>) {
-    LazyColumn() {
-        items((users)) { _ ->
-            UserCard()
-        }
-    }
-}
-
-@Composable
-fun UserCard() {
-    val context = LocalContext.current
-
-    Card(
-        elevation = 4.dp,
-        modifier = Modifier
-            .padding(12.dp)
-            .fillMaxWidth()
-            .wrapContentHeight()
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(12.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = "",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(120.dp)
-                    .clip(CircleShape)
-            )
-            Column(
-                modifier = Modifier.padding(start = 8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = stringResource(id = R.string.dummytext), maxLines = 4)
-                Button(onClick = {
-                    Toast.makeText(context, "View Profile Clicked", Toast.LENGTH_SHORT).show()
-                }, Modifier.padding(top = 4.dp)) {
-                    Text(text = "View Profile")
-                }
-            }
-        }
     }
 }
 
@@ -124,6 +55,6 @@ fun UserCard() {
 @Composable
 fun DefaultPreview() {
     Surface(Modifier.fillMaxSize()) {
-        MainContent()
+
     }
 }
