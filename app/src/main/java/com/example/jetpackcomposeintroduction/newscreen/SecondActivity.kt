@@ -1,6 +1,5 @@
 package com.example.jetpackcomposeintroduction.newscreen
 
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -32,7 +32,7 @@ class SecondActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeIntroductionTheme {
-                profileCard()
+                MyDisplay()
             }
         }
     }
@@ -40,9 +40,38 @@ class SecondActivity : ComponentActivity() {
 
 @Composable
 @Preview(name = "Light mood")
-@Preview(name = "Dark mode",
-         uiMode = Configuration.UI_MODE_NIGHT_YES
-)
+//@Preview(name = "Dark mode",
+//         uiMode = Configuration.UI_MODE_NIGHT_YES
+//)
+fun MyDisplay() {
+    Column() {
+        Greetings()
+        profileCard()
+    }
+}
+
+@Composable
+fun Greetings(nameList: List<String> = listOf("amit", "sourav")) {
+    nameList.forEachIndexed { index, it -> GreetingsCard(name = it, if (index == 0) 8 else 4) }
+}
+
+@Composable
+fun GreetingsCard(name: String, topPadding: Int) {
+    Spacer(modifier = Modifier.width(4.dp))
+    Surface(color = MaterialTheme.colors.primary, modifier = Modifier.padding(start = 8.dp, top = topPadding.dp, end = 8.dp, bottom = 8.dp)) {
+        Row(modifier = Modifier.padding(24.dp)) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = "Hello")
+                Text(text = name)
+            }
+            OutlinedButton(onClick = { /*TODO*/ }) {
+                Text(text = "Send Message")
+            }
+        }
+    }
+}
+
+@Composable
 fun profileCard() {
     Row(modifier = Modifier.padding(top = 16.dp, start = 16.dp)) {
         Image(painter = painterResource(id = R.drawable.my_image), contentDescription = null, modifier = Modifier
