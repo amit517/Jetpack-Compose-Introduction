@@ -11,7 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetpackcomposeintroduction.newscreen2.ui.theme.JetpackComposeIntroductionTheme
+import com.example.jetpackcomposeintroduction.theme.JetpackComposeIntroductionTheme
 
 class NewScreenActivity : ComponentActivity() {
 
@@ -19,9 +19,8 @@ class NewScreenActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeIntroductionTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.primary) {
-                    Greeting("Android")
+                Surface() {
+                    PlayWithColumn()
                 }
             }
         }

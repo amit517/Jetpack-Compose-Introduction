@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeintroduction.newscreen2.ui.theme
+package com.example.jetpackcomposeintroduction.theme
 
 import android.app.Activity
 import android.os.Build
