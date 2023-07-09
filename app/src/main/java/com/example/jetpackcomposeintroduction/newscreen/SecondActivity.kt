@@ -17,6 +17,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,7 +47,7 @@ class SecondActivity : ComponentActivity() {
 fun MyDisplay() {
     Column() {
         Greetings()
-        profileCard()
+        profileCard("Amit Kundu")
     }
 }
 
@@ -72,7 +73,7 @@ fun GreetingsCard(name: String, topPadding: Int) {
 }
 
 @Composable
-fun profileCard() {
+fun profileCard(name : String) {
     Row(modifier = Modifier.padding(top = 16.dp, start = 16.dp)) {
         Image(painter = painterResource(id = R.drawable.my_image), contentDescription = null, modifier = Modifier
             // Set image size to 40 dp
@@ -87,7 +88,7 @@ fun profileCard() {
 
         Column() {
             Surface(shape = MaterialTheme.shapes.medium, elevation = 1.dp) {
-                Text(text = "Amit Kundu", color = MaterialTheme.colors.secondaryVariant, modifier = Modifier.padding(4.dp))
+                Text(text = name, color = MaterialTheme.colors.secondaryVariant, modifier = Modifier.padding(4.dp))
             }
 
             Spacer(modifier = Modifier.height(4.dp))
