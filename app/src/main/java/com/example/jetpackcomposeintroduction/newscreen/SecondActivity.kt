@@ -40,7 +40,7 @@ class SecondActivity : ComponentActivity() {
 }
 
 @Composable
-@Preview(name = "Light mood")
+@Preview(name = "Light mood", showSystemUi = true)
 //@Preview(name = "Dark mode",
 //         uiMode = Configuration.UI_MODE_NIGHT_YES
 //)
