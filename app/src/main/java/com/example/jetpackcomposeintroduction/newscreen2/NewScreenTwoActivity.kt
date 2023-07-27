@@ -122,6 +122,18 @@ class NewScreenActivity : ComponentActivity() {
         ) {}
     }
 
+    /**
+     * [Arrangement] Arrangement is something it tell how to draw component (Space, margin etc) will be there. it can have different aspect arrangement.
+     * For Column As the component are stacked from top to bottom if we apply arrangement it will apply vertically for the column
+     * For Row as the component is stacked from left to right if will apply in left to right that means horizontally.
+     */
+
+    /**
+     * [Alignment] will be on the same direction as the component stacked
+     * For column horizontally (Top, bottom)
+     * For row vertically (Start, end)
+     */
+
     @Preview(showSystemUi = true)
     @Composable
     fun ColumnWithSurface() {
@@ -130,7 +142,7 @@ class NewScreenActivity : ComponentActivity() {
                     .background(MaterialTheme.colors.surface)
                     .height(300.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Bottom
+                verticalArrangement = Arrangement.Bottom //
         ) {
             CustomField(weight = 3f, color = Color.Blue)
             CustomField(weight = 2f)
