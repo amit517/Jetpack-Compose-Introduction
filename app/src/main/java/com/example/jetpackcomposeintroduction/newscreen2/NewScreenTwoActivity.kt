@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -40,7 +42,7 @@ class NewScreenActivity : ComponentActivity() {
         setContent {
             JetpackComposeIntroductionTheme {
                 Surface() {
-                    CountGenerator()
+                    RowWithSurface()
                 }
             }
         }
@@ -126,11 +128,38 @@ class NewScreenActivity : ComponentActivity() {
         Column(
                 modifier = Modifier
                     .background(MaterialTheme.colors.surface)
-                    .height(500.dp),
+                    .height(300.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Bottom
         ) {
             CustomField(weight = 3f, color = Color.Blue)
             CustomField(weight = 2f)
+        }
+    }
+
+    @Composable
+    fun RowScope.CustomField(weight : Float, color: Color = Color.Cyan) {
+        Surface(
+                modifier = Modifier
+                    .height(60.dp)
+                    .weight(weight),
+                color = color,
+        ) {}
+    }
+
+    @Preview(showSystemUi = true)
+    @Composable
+    fun RowWithSurface() {
+        Row(
+                modifier = Modifier
+                    .background(MaterialTheme.colors.surface)
+                    .fillMaxWidth()
+                    .padding(end = 16.dp, start = 16.dp),
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.Top
+        ) {
+            CustomField(weight = 3f, color = Color.Blue)
+            CustomField(weight = 3f)
         }
     }
 }
