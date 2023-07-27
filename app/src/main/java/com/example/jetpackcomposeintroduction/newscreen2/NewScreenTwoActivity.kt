@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -109,54 +110,27 @@ class NewScreenActivity : ComponentActivity() {
         }
     }
 
+    @Composable
+    fun ColumnScope.CustomField(weight : Float, color: Color = Color.Cyan) {
+        Surface(
+                modifier = Modifier
+                    .width(200.dp)
+                    .weight(weight),
+                color = color,
+        ) {}
+    }
+
     @Preview(showSystemUi = true)
     @Composable
     fun ColumnWithSurface() {
-        Column(modifier = Modifier
-            .background(MaterialTheme.colors.surface)
-            .fillMaxSize(),
-               verticalArrangement = Arrangement.SpaceAround,
-               horizontalAlignment = Alignment.CenterHorizontally) {
-            Surface(
-                    modifier = Modifier
-                        .width(250.dp)
-                        .height(24.dp),
-                    color = Color.LightGray,
-            ) {
-
-            }
-            Surface(
-                    modifier = Modifier
-                        .width(250.dp)
-                        .height(24.dp),
-                    color = Color.LightGray,
-            ) {
-
-            }
-            Surface(
-                    modifier = Modifier
-                        .width(250.dp)
-                        .height(24.dp),
-                    color = Color.LightGray,
-            ) {
-
-            }
-            Surface(
-                    modifier = Modifier
-                        .width(250.dp)
-                        .height(24.dp),
-                    color = Color.LightGray,
-            ) {
-
-            }
-            Surface(
-                    modifier = Modifier
-                        .width(250.dp)
-                        .height(24.dp),
-                    color = Color.LightGray,
-            ) {
-
-            }
+        Column(
+                modifier = Modifier
+                    .background(MaterialTheme.colors.surface)
+                    .height(500.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            CustomField(weight = 3f, color = Color.Blue)
+            CustomField(weight = 2f)
         }
     }
 }
