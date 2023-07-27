@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -44,15 +45,16 @@ class NewScreenActivity : ComponentActivity() {
         }
     }
 
-    @Preview(showSystemUi = true)
+    //    @Preview(showSystemUi = true)
     @Composable
     fun CountGenerator() {
         var count by remember {
             mutableStateOf(0)
         }
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(Color.LightGray),
+        Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.LightGray),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -60,12 +62,12 @@ class NewScreenActivity : ComponentActivity() {
             Button(
                     onClick = { count++ }, modifier = Modifier.padding(8.dp)
             ) {
-                Text(text = "Add Count",modifier = Modifier.padding(20.dp,8.dp), fontSize = 20.sp)
+                Text(text = "Add Count", modifier = Modifier.padding(20.dp, 8.dp), fontSize = 20.sp)
             }
         }
     }
 
-    @Preview(showSystemUi = true, name = "ExampleColumn")
+    //    @Preview(showSystemUi = true, name = "ExampleColumn")
     @Composable
     fun ExampleColumn() {
         // Column will add all of it's children in Vertical stack
@@ -75,7 +77,7 @@ class NewScreenActivity : ComponentActivity() {
         }
     }
 
-    @Preview(showSystemUi = true, name = "ExampleRow")
+    //    @Preview(showSystemUi = true, name = "ExampleRow")
     @Composable
     fun ExampleRow() {
         // Row will add all of it's children in Horizontal stack
@@ -85,7 +87,7 @@ class NewScreenActivity : ComponentActivity() {
         }
     }
 
-    @Preview(showSystemUi = true)
+    //    @Preview(showSystemUi = true)
     @Composable
     fun RowAndColumn() {
         Column {
@@ -103,6 +105,57 @@ class NewScreenActivity : ComponentActivity() {
             Row {
                 Text(text = "Row 2, Column 1")
                 Text(text = "Row 2, Column 2")
+            }
+        }
+    }
+
+    @Preview(showSystemUi = true)
+    @Composable
+    fun ColumnWithSurface() {
+        Column(modifier = Modifier
+            .background(MaterialTheme.colors.surface)
+            .fillMaxSize(),
+               verticalArrangement = Arrangement.SpaceAround,
+               horizontalAlignment = Alignment.CenterHorizontally) {
+            Surface(
+                    modifier = Modifier
+                        .width(250.dp)
+                        .height(24.dp),
+                    color = Color.LightGray,
+            ) {
+
+            }
+            Surface(
+                    modifier = Modifier
+                        .width(250.dp)
+                        .height(24.dp),
+                    color = Color.LightGray,
+            ) {
+
+            }
+            Surface(
+                    modifier = Modifier
+                        .width(250.dp)
+                        .height(24.dp),
+                    color = Color.LightGray,
+            ) {
+
+            }
+            Surface(
+                    modifier = Modifier
+                        .width(250.dp)
+                        .height(24.dp),
+                    color = Color.LightGray,
+            ) {
+
+            }
+            Surface(
+                    modifier = Modifier
+                        .width(250.dp)
+                        .height(24.dp),
+                    color = Color.LightGray,
+            ) {
+
             }
         }
     }
