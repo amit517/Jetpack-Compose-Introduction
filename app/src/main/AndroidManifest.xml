@@ -10,15 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JetpackComposeIntroduction">
         <activity
-            android:name=".newscreen2.NewScreenActivity"
+            android:name=".newscreen.StateWidgetActivity"
             android:exported="true"
-            android:label="@string/title_activity_new_scren"
-            android:theme="@style/Theme.JetpackComposeIntroduction">
+            android:label="@string/title_activity_state_widget"
+            android:theme="@style/Theme.JetpackComposeIntroduction" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".newscreen2.NewScreenActivity"
+            android:exported="true"
+            android:label="@string/title_activity_new_scren"
+            android:theme="@style/Theme.JetpackComposeIntroduction">
+
         </activity>
         <activity
             android:name=".newscreen.SecondActivity"
