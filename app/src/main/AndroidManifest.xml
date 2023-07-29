@@ -13,12 +13,12 @@
             android:name=".newscreen.StateWidgetActivity"
             android:exported="true"
             android:label="@string/title_activity_state_widget"
-            android:theme="@style/Theme.JetpackComposeIntroduction" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/Theme.JetpackComposeIntroduction">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".newscreen2.NewScreenActivity"
@@ -31,7 +31,13 @@
             android:name=".newscreen.SecondActivity"
             android:exported="true"
             android:label="@string/title_activity_second"
-            android:theme="@style/Theme.JetpackComposeIntroduction" />
+            android:theme="@style/Theme.JetpackComposeIntroduction">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
