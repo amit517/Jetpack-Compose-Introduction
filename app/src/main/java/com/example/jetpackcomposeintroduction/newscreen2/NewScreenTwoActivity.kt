@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -42,7 +44,7 @@ class NewScreenActivity : ComponentActivity() {
         setContent {
             JetpackComposeIntroductionTheme {
                 Surface() {
-                    RowWithSurface()
+                    BoxComposable()
                 }
             }
         }
@@ -113,7 +115,7 @@ class NewScreenActivity : ComponentActivity() {
     }
 
     @Composable
-    fun ColumnScope.CustomField(weight : Float, color: Color = Color.Cyan) {
+    fun ColumnScope.CustomField(weight: Float, color: Color = Color.Cyan) {
         Surface(
                 modifier = Modifier
                     .width(200.dp)
@@ -134,7 +136,7 @@ class NewScreenActivity : ComponentActivity() {
      * For row vertically (Start, end)
      */
 
-    @Preview(showSystemUi = true)
+    //    @Preview(showSystemUi = true)
     @Composable
     fun ColumnWithSurface() {
         Column(
@@ -150,7 +152,7 @@ class NewScreenActivity : ComponentActivity() {
     }
 
     @Composable
-    fun RowScope.CustomField(weight : Float, color: Color = Color.Cyan) {
+    fun RowScope.CustomField(weight: Float, color: Color = Color.Cyan) {
         Surface(
                 modifier = Modifier
                     .height(60.dp)
@@ -159,7 +161,7 @@ class NewScreenActivity : ComponentActivity() {
         ) {}
     }
 
-    @Preview(showSystemUi = true)
+    //    @Preview(showSystemUi = true)
     @Composable
     fun RowWithSurface() {
         Row(
@@ -172,6 +174,30 @@ class NewScreenActivity : ComponentActivity() {
         ) {
             CustomField(weight = 3f, color = Color.Blue)
             CustomField(weight = 3f)
+        }
+    }
+
+    // Box composable are like the frame layout. We can use them when we want to place some component on top of other component.
+    // It has certain alignment by using them we can arrange the positioning of the child component
+    @Preview(showSystemUi = true)
+    @Composable
+    fun BoxComposable() {
+        Box(modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center) {
+            Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(24.dp)
+                        .background(Color.Blue),
+                    contentAlignment = Alignment.Center) {
+                Box(modifier = Modifier
+                    .background(Color.Green)
+                    .wrapContentSize(),
+                    contentAlignment = Alignment.TopCenter) {
+                    Text(text = "Love Inside", fontSize = 40.sp)
+                }
+                Text(text = "I love android", fontSize = 40.sp)
+            }
         }
     }
 }
