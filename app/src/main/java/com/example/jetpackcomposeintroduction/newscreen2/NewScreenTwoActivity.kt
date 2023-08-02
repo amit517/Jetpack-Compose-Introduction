@@ -32,10 +32,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.jetpackcomposeintroduction.R
 import com.example.jetpackcomposeintroduction.ui.theme.JetpackComposeIntroductionTheme
+import java.nio.file.WatchEvent
 
 class NewScreenActivity : ComponentActivity() {
 
@@ -43,8 +54,11 @@ class NewScreenActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeIntroductionTheme {
-                Surface() {
-                    BoxComposable()
+                Box(modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.TopCenter) {
+                    Surface(modifier = Modifier.fillMaxSize()) {
+                        AnnotatedText()
+                    }
                 }
             }
         }
@@ -199,5 +213,59 @@ class NewScreenActivity : ComponentActivity() {
                 Text(text = "I love android", fontSize = 40.sp)
             }
         }
+    }
+
+    // Text Customization
+    @Preview(showBackground = true, showSystemUi = true)
+    @Composable
+    fun CustomizedText() {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Text(text = stringResource(id = R.string.app_name),
+                 modifier = Modifier
+                     .width(350.dp)
+                     .background(Color.Blue)
+                     .padding(16.dp),
+                 color = Color.White,
+                 fontSize = MaterialTheme.typography.h6.fontSize,
+                 fontStyle = FontStyle.Italic,
+                 fontWeight = FontWeight.SemiBold,
+                 textAlign = TextAlign.Center
+            )
+        }
+    }
+
+    // Text Customization
+    @Preview(showBackground = true, showSystemUi = true)
+    @Composable
+    fun AnnotatedText() {
+        Text(
+                buildAnnotatedString {
+                    withStyle(style = ParagraphStyle(textAlign = TextAlign.Center)) {
+                        withStyle(
+                                style = SpanStyle(
+                                        color = Color.Blue,
+                                        fontSize = 30.sp
+                                )
+
+                        ) {
+                            append("A")
+                        }
+                        append("B")
+                        append("C")
+                        append("D")
+                        append("E")
+                    }
+
+                }, modifier = Modifier.width(200.dp)
+        )
+    }
+
+    // Text Customization
+    @Preview(showBackground = true, showSystemUi = true)
+    @Composable
+    fun CustomizedText3() {
+        Text(text = "Hello world".repeat(20),
+             maxLines = 2,
+             overflow = TextOverflow.Ellipsis)
     }
 }
