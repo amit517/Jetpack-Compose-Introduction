@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -57,7 +59,7 @@ class NewScreenActivity : ComponentActivity() {
                 Box(modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.TopCenter) {
                     Surface(modifier = Modifier.fillMaxSize()) {
-                        AnnotatedText()
+                        CustomSelectableText()
                     }
                 }
             }
@@ -267,5 +269,22 @@ class NewScreenActivity : ComponentActivity() {
         Text(text = "Hello world".repeat(20),
              maxLines = 2,
              overflow = TextOverflow.Ellipsis)
+    }
+
+    @Preview(showBackground = true, showSystemUi = true)
+    @Composable
+    fun CustomSelectableText() {
+        SelectionContainer {
+            // Inside this scope all the text will be selectable
+            Column {
+                Text(text = "Hello world 1")
+                Text(text = "Hello world 2")
+                DisableSelection {
+                    // If we want to make any text not selectable then we can use this composable
+                    Text(text = "Hello world 3")
+                }
+                Text(text = "Hello world 4")
+            }
+        }
     }
 }
