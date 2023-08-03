@@ -40,12 +40,15 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.withStyledAttributes
 import com.example.jetpackcomposeintroduction.R
 import com.example.jetpackcomposeintroduction.ui.theme.JetpackComposeIntroductionTheme
 import java.nio.file.WatchEvent
@@ -59,7 +62,7 @@ class NewScreenActivity : ComponentActivity() {
                 Box(modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.TopCenter) {
                     Surface(modifier = Modifier.fillMaxSize()) {
-                        CustomSelectableText()
+                        SuperScriptText("Hello", "world")
                     }
                 }
             }
@@ -286,5 +289,39 @@ class NewScreenActivity : ComponentActivity() {
                 Text(text = "Hello world 4")
             }
         }
+    }
+
+    @Composable
+    fun SuperScriptText(
+        normalText: String,
+        superText: String,
+        normalFont: TextUnit = MaterialTheme.typography.subtitle1.fontSize,
+        superTextStyle : TextUnit = MaterialTheme.typography.overline.fontSize) {
+        Text(
+                buildAnnotatedString {
+                    withStyle(
+                            style = SpanStyle(fontSize = normalFont)
+
+                    ) {
+                        append(normalText)
+                    }
+                    // Here we are making the super text or Superscript
+                    withStyle(
+                            style = SpanStyle(fontSize = superTextStyle,
+                                              fontWeight = FontWeight.Normal,
+//                                              baselineShift = BaselineShift.Superscript, // (Shifted Up)
+                                              baselineShift = BaselineShift.Subscript, // Change the style (Shifted bottom)
+                                              )
+
+                    ) {
+                        append(superText)
+                    }
+                }
+        )
+    }
+    @Preview(showBackground = true, showSystemUi = true)
+    @Composable
+    fun SuperTextPreview() {
+        SuperScriptText("Hello", "world")
     }
 }
