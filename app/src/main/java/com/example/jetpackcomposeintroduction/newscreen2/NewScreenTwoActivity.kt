@@ -3,8 +3,10 @@ package com.example.jetpackcomposeintroduction.newscreen2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +30,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -52,21 +55,23 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpackcomposeintroduction.R
-import com.example.jetpackcomposeintroduction.component.ExpandableCard
 import com.example.jetpackcomposeintroduction.ui.theme.JetpackComposeIntroductionTheme
 
 class NewScreenActivity : ComponentActivity() {
 
-
+    private val viewModel: NewScreenTwoVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val composeColor = viewModel.composeColor.collectAsState()
+
             JetpackComposeIntroductionTheme {
-                Column (Modifier.fillMaxSize()
-                            .background(Color.Gray)
-                            .padding(16.dp)){
-                    ExpandableCard(title = "My title", description = "\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"")
+                Column(Modifier
+                           .fillMaxSize()
+                           .background(Color.Gray)
+                           .padding(16.dp)) {
+                    ChangeBackGroundColor(composeColor.value, viewModel::changeColor)
                 }
             }
         }
@@ -299,7 +304,7 @@ class NewScreenActivity : ComponentActivity() {
         normalText: String,
         superText: String,
         normalFont: TextUnit = MaterialTheme.typography.subtitle1.fontSize,
-        superTextStyle : TextUnit = MaterialTheme.typography.overline.fontSize) {
+        superTextStyle: TextUnit = MaterialTheme.typography.overline.fontSize) {
         Text(
                 buildAnnotatedString {
                     withStyle(
@@ -310,11 +315,12 @@ class NewScreenActivity : ComponentActivity() {
                     }
                     // Here we are making the super text or Superscript
                     withStyle(
-                            style = SpanStyle(fontSize = superTextStyle,
-                                              fontWeight = FontWeight.Normal,
-//                                              baselineShift = BaselineShift.Superscript, // (Shifted Up)
-                                              baselineShift = BaselineShift.Subscript, // Change the style (Shifted bottom)
-                                              )
+                            style = SpanStyle(
+                                    fontSize = superTextStyle,
+                                    fontWeight = FontWeight.Normal,
+                                    //                                              baselineShift = BaselineShift.Superscript, // (Shifted Up)
+                                    baselineShift = BaselineShift.Subscript, // Change the style (Shifted bottom)
+                            )
 
                     ) {
                         append(superText)
@@ -339,9 +345,9 @@ class NewScreenActivity : ComponentActivity() {
             mutableStateOf(mutableStateListOf<Int>())
         }
 
-        Column (modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top){
+        Column(modifier = Modifier.fillMaxSize(),
+               horizontalAlignment = Alignment.CenterHorizontally,
+               verticalArrangement = Arrangement.Top) {
             Button(onClick = {
                 list.add(122)
             }) {
@@ -355,8 +361,27 @@ class NewScreenActivity : ComponentActivity() {
     @Composable
     fun RenderList(list: MutableList<Int>) {
         LazyColumn(modifier = Modifier.fillMaxHeight()) {
-            items(list.size){
+            items(list.size) {
                 Text(text = "Number $it")
             }
-    }}
+        }
+    }
+
+    @Composable
+    fun ChangeBackGroundColor(
+        colorCode: Int,
+        onSurfaceClicked: () -> Unit) {
+        Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clickable() {
+                        onSurfaceClicked()
+                    }
+                    .background(
+                            Color(colorCode)
+                    ),
+        ) {
+
+        }
+    }
 }
