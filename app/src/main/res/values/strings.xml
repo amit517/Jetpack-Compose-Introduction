@@ -4,4 +4,5 @@
     <string name="title_activity_second">SecondActivity</string>
     <string name="title_activity_new_scren">NewScrenActivity</string>
     <string name="title_activity_state_widget">StateWidgetActivity</string>
+    <string name="title_activity_flow">FlowActivity</string>
 </resources>
