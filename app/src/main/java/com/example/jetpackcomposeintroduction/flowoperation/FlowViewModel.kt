@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class FlowViewModel : ViewModel() {
 
@@ -30,6 +31,19 @@ class FlowViewModel : ViewModel() {
         _usersList.update {
             it.map { curUser ->
                 if (curUser.id == user.id) user else curUser
+            }
+        }
+    }
+
+    init {
+        viewModelScope.launch {
+            usersList.collect {
+                println(it)
+            }
+        }
+        viewModelScope.launch {
+            localUsers.collect {
+                println(it)
             }
         }
     }
