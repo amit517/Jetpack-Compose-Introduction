@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.jetpackcomposeintroduction.LocalUser
 import kotlinx.coroutines.launch
 
 @Composable
@@ -15,10 +16,12 @@ fun SavableTimer() {
     val scope = rememberCoroutineScope()
 
     val testState: TestState = rememberTestState(100)
-
+    val currentUser = LocalUser.current
 
     Column(modifier = Modifier,
            horizontalAlignment = Alignment.CenterHorizontally) {
+
+        Text(text = "Local user $currentUser")
 
         Text(text = testState.elapsedTime.toString())
 

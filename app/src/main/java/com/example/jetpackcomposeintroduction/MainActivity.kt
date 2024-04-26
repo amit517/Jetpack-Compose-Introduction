@@ -14,6 +14,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,27 +28,32 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeintroduction.customsavable.SavableTimer
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SavableTimer()
+            CompositionLocalProvider(LocalUser provides User(2)) {
+                SavableTimer()
+            }
         }
     }
 }
 
 data class User(
-    val id: Int
+    val id: Int = 0
 )
+
+val LocalUser = compositionLocalOf { User() }
 
 val users = listOf(User(1), User(1), User(1), User(1), User(1), User(1), User(1), User(1))
 
 @Composable
 fun UserList() {
-//    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-//        for (i in 1..10) {
-//            UserCard()
-//        }
-//    }
+    //    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+    //        for (i in 1..10) {
+    //            UserCard()
+    //        }
+    //    }
 
     LazyColumn() {
         items((users)) { _ ->
@@ -60,29 +67,29 @@ fun UserCard() {
     val context = LocalContext.current
 
     Card(
-        elevation = 4.dp,
-        modifier = Modifier
-            .padding(12.dp)
-            .fillMaxWidth()
-            .wrapContentHeight()
-    ) {
-        Row(
+            elevation = 4.dp,
             modifier = Modifier
+                .padding(12.dp)
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(12.dp)
+    ) {
+        Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(12.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = "",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(120.dp)
-                    .clip(CircleShape)
+                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(120.dp)
+                        .clip(CircleShape)
             )
             Column(
-                modifier = Modifier.padding(start = 8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.padding(start = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(text = stringResource(id = R.string.dummytext), maxLines = 4)
                 Button(onClick = {
