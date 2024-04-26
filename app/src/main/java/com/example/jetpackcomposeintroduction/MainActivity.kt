@@ -16,6 +16,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,7 +33,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CompositionLocalProvider(LocalUser provides User(2)) {
+            CompositionLocalProvider(LocalUser provides User(2), StaticLocalUser provides User(3)) {
                 SavableTimer()
             }
         }
@@ -44,6 +45,7 @@ data class User(
 )
 
 val LocalUser = compositionLocalOf { User() }
+val StaticLocalUser = staticCompositionLocalOf { User() }
 
 val users = listOf(User(1), User(1), User(1), User(1), User(1), User(1), User(1), User(1))
 
